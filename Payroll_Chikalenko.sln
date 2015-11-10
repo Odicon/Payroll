@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payroll_Chikalenko", "Payroll_Chikalenko\Payroll_Chikalenko.csproj", "{AE73F1F8-829E-439D-B075-8F2C959C97BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollTest_Chikalenko", "PayrollTest_Chikalenko\PayrollTest_Chikalenko.csproj", "{C6CDDC6E-0E3E-4219-95D2-71610EE8F5F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE73F1F8-829E-439D-B075-8F2C959C97BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE73F1F8-829E-439D-B075-8F2C959C97BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE73F1F8-829E-439D-B075-8F2C959C97BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE73F1F8-829E-439D-B075-8F2C959C97BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6CDDC6E-0E3E-4219-95D2-71610EE8F5F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CDDC6E-0E3E-4219-95D2-71610EE8F5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CDDC6E-0E3E-4219-95D2-71610EE8F5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CDDC6E-0E3E-4219-95D2-71610EE8F5F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
