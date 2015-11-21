@@ -89,5 +89,20 @@ namespace PayrollTest_Chikalenko
             PaymentMethod pm = e.Method;
             Assert.IsTrue(pm is HoldMethod);
         }
+
+        [TestMethod]
+        public void DeleteEmployee()
+        {
+            int empId = 4;
+            AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Bill", "Home", 2500, 3.2);
+            t.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            DeleteEmployeeTransaction dt = new DeleteEmployeeTransaction(empId);
+            dt.Execute();
+            e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNull(e);
+        }
+
     }
 }

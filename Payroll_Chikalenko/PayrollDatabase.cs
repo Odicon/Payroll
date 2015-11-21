@@ -20,5 +20,10 @@ namespace Payroll_Chikalenko
         {
             return employees[id] as Employee;
         }
+
+        public static void DeleteEmployee(int empid)
+        {
+            employees.Remove(empid);
+        }
     }
 }
