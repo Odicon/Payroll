@@ -121,5 +121,23 @@ namespace PayrollTest_Chikalenko
             Assert.IsNotNull(tc);
             Assert.AreEqual(8.0, tc.Hours);
         }
+
+        [TestMethod]
+        public void TestSalesReceiptTransaction()
+        {
+            int empId = 6;
+            AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Bob", "Home", 10.0, 12.0);
+            t.Execute();
+            SalesReceiptTransaction srt = new SalesReceiptTransaction(new DateTime(2015, 10, 31), 10, empId);
+            srt.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentClassification pc = e.Classification;
+            Assert.IsTrue(pc is CommissionedClassification);
+            CommissionedClassification cc = pc as CommissionedClassification;
+            SalesReceipt sr = cc.GetSalesReceipt(new DateTime(2015, 10, 31));
+            Assert.IsNotNull(sr);
+            Assert.AreEqual(10, sr.Amount);
+        }
     }
 }

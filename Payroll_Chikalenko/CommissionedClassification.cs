@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,17 @@ namespace Payroll_Chikalenko
     {
         private readonly double salary;
         private readonly double commissionRate;
+        private Hashtable salesReceipts = new Hashtable();
+
+        public SalesReceipt GetSalesReceipt(DateTime date)
+        {
+            return salesReceipts[date] as SalesReceipt;
+        }
+
+        public void AddSalesReceipt(SalesReceipt receipt)
+        {
+            salesReceipts[receipt.Date] = receipt;
+        }
 
         public CommissionedClassification(double salary, double commissionRate)
         {
