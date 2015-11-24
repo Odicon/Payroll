@@ -139,5 +139,24 @@ namespace PayrollTest_Chikalenko
             Assert.IsNotNull(sr);
             Assert.AreEqual(10, sr.Amount);
         }
+
+        [TestMethod]
+        public void TestAddServiceCharge()
+        {
+            int empId = 7;
+            AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+            t.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            UnionAffiliation af = new UnionAffiliation();
+            e.Affiliation = af;
+            int memberId = 86;
+            PayrollDatabase.AddUnionMember(86, e);
+            ServiceChargeTransaction sct = new ServiceChargeTransaction(memberId, new DateTime(2015, 11, 8), 12.95);
+            sct.Execute();
+            ServiceCharge sc = af.GerServiceCharge(new DateTime(2015, 11, 8));
+            Assert.IsNotNull(sc);
+            Assert.AreEqual(12.95, sc.Charge, .001);
+        }
     }
 }
