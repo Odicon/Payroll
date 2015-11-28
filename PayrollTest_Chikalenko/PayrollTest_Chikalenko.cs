@@ -158,5 +158,31 @@ namespace PayrollTest_Chikalenko
             Assert.IsNotNull(sc);
             Assert.AreEqual(12.95, sc.Charge, .001);
         }
+
+        [TestMethod]
+        public void TestChangeNameTransaction()
+        {
+            int empId = 2;
+            AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+            t.Execute();
+            ChangeNameTransaction cnt = new ChangeNameTransaction(empId, "Bob");
+            cnt.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            Assert.AreEqual("Bob", e.Name);
+        }
+
+        [TestMethod]
+        public void TestChangeAddressTransaction()
+        {
+            int empId = 2;
+            AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bob", "Address", 15.25);
+            t.Execute();
+            ChangeAddressTransaction cat = new ChangeAddressTransaction(empId, "Home");
+            cat.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            Assert.AreEqual("Home", e.Address);
+        }
     }
 }

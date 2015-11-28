@@ -32,6 +32,7 @@ namespace Payroll_Chikalenko
         public string Address
         {
             get { return address; }
+            set { address = value; }
         }
 
         public int EmpId
