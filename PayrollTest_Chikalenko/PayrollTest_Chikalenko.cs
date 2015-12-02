@@ -184,5 +184,63 @@ namespace PayrollTest_Chikalenko
             Assert.IsNotNull(e);
             Assert.AreEqual("Home", e.Address);
         }
+
+        [TestMethod]
+        public void TestChangeHourlyTransaction()
+        {
+            int empId = 8;
+            AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
+            t.Execute();
+            ChangeHourlyTransaction cht = new ChangeHourlyTransaction(empId, 27.52);
+            cht.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentClassification pc = e.Classification;
+            Assert.IsNotNull(pc);
+            Assert.IsTrue(pc is HourlyClassification);
+            HourlyClassification hc = pc as HourlyClassification;
+            Assert.AreEqual(27.52, hc.HourlyRate, .001);
+            PaymentSchedule ps = e.Schedule;
+            Assert.IsTrue(ps is WeeklySchedule);
+        }
+
+        [TestMethod]
+        public void TestChangeSalariedTransaction()
+        {
+            int empId = 9;
+            AddSalariedEmployee t = new AddSalariedEmployee(empId, "Lance", "Home", 2500);
+            t.Execute();
+            ChangeSalariedTransaction cst = new ChangeSalariedTransaction(empId, 200);
+            cst.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentClassification pc = e.Classification;
+            Assert.IsNotNull(pc);
+            Assert.IsTrue(pc is SalariedClassification);
+            SalariedClassification sc = pc as SalariedClassification;
+            Assert.AreEqual(200, sc.Salary, .001);
+            PaymentSchedule ps = e.Schedule;
+            Assert.IsTrue(ps is MonthlySchedule);
+        }
+
+        [TestMethod]
+        public void TestChangeCommissionedTransaction()
+        {
+            int empId = 9;
+            AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 12.0);
+            t.Execute();
+            ChangeCommissionedTransaction cct = new ChangeCommissionedTransaction(empId, 200, 10.5);
+            cct.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentClassification pc = e.Classification;
+            Assert.IsNotNull(pc);
+            Assert.IsTrue(pc is CommissionedClassification);
+            CommissionedClassification cc = pc as CommissionedClassification;
+            Assert.AreEqual(200, cc.Salary, .001);
+            Assert.AreEqual(10.5, cc.CommissionRate, .001);
+            PaymentSchedule ps = e.Schedule;
+            Assert.IsTrue(ps is BiweeklySchedule);
+        }
     }
 }
