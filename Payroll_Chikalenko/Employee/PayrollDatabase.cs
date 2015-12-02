@@ -22,7 +22,7 @@ namespace Payroll_Chikalenko
             return unionMembers[id] as Employee;
         }
 
-        public void RemoveUnionMember(int memberId)
+        public static void RemoveUnionMember(int memberId)
         {
             unionMembers.Remove(memberId);
         }
