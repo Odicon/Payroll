@@ -242,5 +242,51 @@ namespace PayrollTest_Chikalenko
             PaymentSchedule ps = e.Schedule;
             Assert.IsTrue(ps is BiweeklySchedule);
         }
+
+
+        [TestMethod]
+        public void TestChangeMailTransaction()
+        {
+            int empId = 10;
+            AddSalariedEmployee t = new AddSalariedEmployee(empId, "Lance", "Home", 1000.00);
+            t.Execute();
+            ChangeMailTransaction cmt = new ChangeMailTransaction(empId);
+            cmt.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentMethod pm = e.Method;
+            Assert.IsNotNull(pm);
+            Assert.IsTrue(pm is MailMethod);
+        }
+
+        [TestMethod]
+        public void TestChangeDirectTransaction()
+        {
+            int empId = 10;
+            AddSalariedEmployee t = new AddSalariedEmployee(empId, "Lance", "Home", 1000.00);
+            t.Execute();
+            ChangeDirectTransaction cmt = new ChangeDirectTransaction(empId);
+            cmt.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentMethod pm = e.Method;
+            Assert.IsNotNull(pm);
+            Assert.IsTrue(pm is DirectDepositMethod);
+        }
+
+        [TestMethod]
+        public void TestChangeHoldTransaction()
+        {
+            int empId = 10;
+            AddSalariedEmployee t = new AddSalariedEmployee(empId, "Lance", "Home", 1000.00);
+            t.Execute();
+            ChangeHoldTransaction cmt = new ChangeHoldTransaction(empId);
+            cmt.Execute();
+            Employee e = PayrollDatabase.GetEmployee(empId);
+            Assert.IsNotNull(e);
+            PaymentMethod pm = e.Method;
+            Assert.IsNotNull(pm);
+            Assert.IsTrue(pm is HoldMethod);
+        }
     }
 }
